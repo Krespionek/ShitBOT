@@ -6,14 +6,16 @@ module.exports= {
   run: async(client,message,args,guild) => {
     let banned = message.mentions.users.first() || client.users.resolve(args[0]);
     let reason = args.slice(1).join(" ");
+    let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
   
     //Wiadomośći
   
     if (!banned) {
       let baninfoembed = new Discord.MessageEmbed()
         .setTitle("Błąd:")
+        .setThumbnail('http://www.e-gify.pl/gify/emotikony/emotikony_duze/milosne/milosc15_(www.e-gify.pl).gif')
         .setDescription(
-          `**Poprawne użycie: ban | oznaczenie | | powód | . \n` +
+          `**Poprawne użycie ban/oznaczenie/powód** \n` +
             ""
         )
         .setColor("#ff1100");
@@ -24,7 +26,7 @@ module.exports= {
   
     if (message.author === banned) {
       let sanctionyourselfembed = new Discord.MessageEmbed()
-        .setDescription(`Nie możesz samego siebie zbanować  || (Nie ładnie)) ||`)
+        .setDescription(`Nie możesz samego siebie zbanować   || (Nie ładnie) ||`)
         .setColor("#ff1100");
       message.channel.send(sanctionyourselfembed);
   
@@ -33,6 +35,7 @@ module.exports= {
   
     if (!reason) {
       let noreasonembed = new Discord.MessageEmbed()
+      .setTitle(`Błąd:`)
         .setDescription(`Podaj powód zbanowania`)
         .setColor("#ff1100");
       message.channel.send(noreasonembed);
@@ -66,8 +69,9 @@ module.exports= {
   
     let successfullyembed = new Discord.MessageEmbed()
       .setTitle(`${banned.tag}`)
-      .addField(`Powód: ${reason}`)
-      .setURL(`https://media4.giphy.com/media/qPD4yGsrc0pdm/giphy.gif?cid=ecf05e47kz8y22tmxcw62e3dyqsj8v2srm8znelra9sm1p9i&rid=giphy.gif`)
+      .addField(`Powód: `, `${reason}`)
+      .setThumbnail(user.user.displayAvatarURL())
+      .setImage(`https://media4.giphy.com/media/qPD4yGsrc0pdm/giphy.gif?cid=ecf05e47kz8y22tmxcw62e3dyqsj8v2srm8znelra9sm1p9i&rid=giphy.gif`)
       .setColor("#ff1100");
   
     message.channel.send(successfullyembed);
