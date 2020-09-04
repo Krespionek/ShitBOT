@@ -16,7 +16,6 @@ client.commands= new Discord.Collection();
 
 const prefix = '$';
 
-
 const commandFiles = readdirSync(join(__dirname, "commands")).filter(file => file.endsWith(".js"));
 
 for (const file of commandFiles) {
@@ -107,4 +106,4 @@ client.on("message", async message => {
 
 
 
-client.login('NzQ5MTkzMDE0NzI2ODg1NDc2.X0oaXg.6ljh54Li8VsXN1E91OFeo9ezai8');
+client.login('NzQ5MTkzMDE0NzI2ODg1NDc2.X0oaXg.sOrm_BhSzfVu5jCPEaYfKXHx6-QKrespion');
