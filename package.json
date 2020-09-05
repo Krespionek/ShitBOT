@@ -5,7 +5,6 @@
     "scripts": {
         "dev": "node index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
-    
     },
     "author": "Krespion",
     "license": "ISC",
@@ -14,6 +13,7 @@
         "axios": "^0.20.0",
         "body": "^5.1.0",
         "common-tags": "^1.8.0",
+        "config.json": "0.0.4",
         "dabi-images": "^2.7.5",
         "discord.js": "^12.3.1",
         "discord.js-pagination": "^1.0.2",

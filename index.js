@@ -1,5 +1,5 @@
 const { Client, MessageEmbed } = require('discord.js');
-
+const db = require("quick.db")
 
 const client = new Client();
 
@@ -13,6 +13,8 @@ const { join } = require('path');
 const { random } = require('mathjs');
 
 client.commands= new Discord.Collection();
+
+ 
 
 const prefix = '$';
 
@@ -78,9 +80,31 @@ client.on("message", async message => {
         }
     }
 })
+////////////////////////////
+//Wlecome
+////////////////////////////
+client.on("guildMemberAdd", (member) => {
+    let chx = db.get(`welchannel_${member.guild.id}`);
+    
+    if(chx === null) {
+      return;
+    }
+  
+    let wembed = new MessageEmbed()
+    .setAuthor(member.user.username, member.user.avatarURL())
+    .setColor("#1eff00")
+    .setThumbnail(member.user.avatarURL())
+    .setDescription(`Witamy cię mamy nadzeje, że będziesz dobrze się tutaj bawaić`)
+    .setFooter(`Stworzone:`, member.user.avatarURL())
+    .setTimestamp()
+    
+    client.channels.cache.get(chx).send(wembed)
+  })
+  
 
-
-  //embed
+////////////////////////////
+//pomoc
+///////////////////////////
 
 
   client.on('message', message => {
@@ -92,7 +116,7 @@ client.on("message", async message => {
         .setColor('#4dff00')
         .addField(`Pomoec jest w trakcie roboty dla servera: ${message.guild.name}`, 'Miłego Bota życzy Krespiona haha 💗')
         .addField('Podstawowe:', '`pomoc` , `serwer` , `bot` , `userinfo` , `developer`.')
-        .addField('Komendy Moderacyjne: ', '`ban` , `bany` , `kick` , `clear` , `mute` , `unmute` , `warn` , `unwarn` **,** `dm`.')
+        .addField('Komendy Moderacyjne: ', '`powitania` , `ban` , `bany` , `kick` , `clear` , `mute` , `unmute` , `warn` , `unwarn` , `dm`.')
         .addField(`Przydatne:`, '`instagram` , `pogoda` , `ping` , `choroba` , `oblicz` , `avatar` , `emoji`.')
         .addField('Bocik:', '`bot` , `invite` , `ping` **,** `prefix $`.')
         .addField('4Fun', '`memy` , `tekst` , `będą tutaj ziwrzęta jescze`')
@@ -106,4 +130,4 @@ client.on("message", async message => {
 
 
 
-client.login('NzQ5MTkzMDE0NzI2ODg1NDc2.X0oaXg.sOrm_BhSzfVu5jCPEaYfKXHx6-QKrespion');
+client.login('NzQ5MTkzMDE0NzI2ODg1NDc2.X0oaXg.elpRKlTKXwB_AZJ1I8-0mfI_qa4');
